@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  post-db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: pdb
+      POSTGRES_PASSWORD: pdb
+      POSTGRES_DB: pdb
+    ports:
+      - "5432:5432"
+  comment-db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: cdb
+      POSTGRES_PASSWORD: cdb
+      POSTGRES_DB: cdb
+    ports:
+      - "5433:5433"
