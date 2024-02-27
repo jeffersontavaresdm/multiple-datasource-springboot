@@ -58,12 +58,12 @@ app:
 ```
 
 ### Inicialização das Tabelas
-Os arquivos de schema `posts-schema.sql` e `comments-schema.sql` são carregados dinamicamente quando a aplicação é iniciada. Essas definições estão contidas no arquivo `DataSourceConfiguration.kt`.
+Os arquivos de schema `table01-schema.sql` e `table02-schema.sql` são carregados dinamicamente quando a aplicação é iniciada. Essas definições estão contidas no arquivo `DataSourceConfiguration.kt`.
 ```
 @Bean
 fun postDatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseInitializer {
     val settings = DatabaseInitializationSettings().apply {
-        schemaLocations = listOf("classpath:posts-schema.sql")
+        schemaLocations = listOf("classpath:table01-schema.sql")
         mode = DatabaseInitializationMode.ALWAYS
     }
 
@@ -73,7 +73,7 @@ fun postDatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseIni
 @Bean
 fun commentDatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseInitializer {
     val settings = DatabaseInitializationSettings().apply {
-        schemaLocations = listOf("classpath:comments-schema.sql")
+        schemaLocations = listOf("classpath:table02-schema.sql")
         mode = DatabaseInitializationMode.ALWAYS
     }
 

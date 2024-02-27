@@ -1,7 +1,7 @@
 package jeffersontdm.multipledatasources
 
-import jeffersontdm.multipledatasources.classes.Comment
-import jeffersontdm.multipledatasources.classes.Post
+import jeffersontdm.multipledatasources.dto.Table02
+import jeffersontdm.multipledatasources.dto.Table01
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -15,14 +15,19 @@ class MultipleDatasourcesApplication {
   @Bean
   fun runner(
     postJDBCClient: JdbcClient,
-    @Qualifier("commentJDBCClient") commentJDBCClient: JdbcClient
+    @Qualifier("table02DataSource") commentJDBCClient: JdbcClient
   ) = ApplicationRunner {
-    val posts = postJDBCClient.sql("SELECT * FROM post").query(Post::class.java).list()
-    val comments = commentJDBCClient.sql("SELECT * FROM comment").query(Comment::class.java).list()
+    val table01 = postJDBCClient
+      .sql("SELECT * FROM table_01")
+      .query(Table01::class.java)
+      .list()
+    val table02 = commentJDBCClient
+      .sql("SELECT * FROM table_02")
+      .query(Table02::class.java)
+      .list()
 
-    println("POSTS: $posts")
-    println()
-    println("COMMENTS: $comments")
+    println("TABLE_01: $table01")
+    println("TABLE_02: $table02")
   }
 }
 

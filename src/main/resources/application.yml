@@ -1,10 +1,10 @@
 app:
   datasource:
-    post:
+    table01:
       url: jdbc:postgresql://localhost:5432/pdb
       username: pdb
       password: pdb
-    comment:
+    table02:
       url: jdbc:postgresql://localhost:5433/cdb
       username: cdb
       password: cdb

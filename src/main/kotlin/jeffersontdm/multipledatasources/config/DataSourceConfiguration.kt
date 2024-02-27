@@ -1,4 +1,4 @@
-package jeffersontdm.multipledatasources.classes
+package jeffersontdm.multipledatasources.config
 
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
@@ -16,18 +16,18 @@ import javax.sql.DataSource
 class DataSourceConfiguration {
 
   /**
-   * Database config: post
+   * Database config: table_01
    */
-  @ConfigurationProperties(prefix = "app.datasource.post")
+  @ConfigurationProperties(prefix = "app.datasource.table01")
   @Bean
   @Primary
-  fun postDataSourcePropperties(): DataSourceProperties {
+  fun table01DataSourcePropperties(): DataSourceProperties {
     return DataSourceProperties()
   }
 
   @Bean
   @Primary
-  fun postDataSource(datasourcePropperties: DataSourceProperties): DataSource {
+  fun table01DataSource(datasourcePropperties: DataSourceProperties): DataSource {
     return datasourcePropperties
       .initializeDataSourceBuilder()
       .build()
@@ -35,12 +35,12 @@ class DataSourceConfiguration {
 
   @Bean
   @Primary
-  fun postJDBCClient(dataSource: DataSource): JdbcClient = JdbcClient.create(dataSource)
+  fun table01JDBCClient(dataSource: DataSource): JdbcClient = JdbcClient.create(dataSource)
 
   @Bean
-  fun postDatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseInitializer {
+  fun table01DatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseInitializer {
     val settings = DatabaseInitializationSettings().apply {
-      schemaLocations = listOf("classpath:posts-schema.sql")
+      schemaLocations = listOf("classpath:table01-schema.sql")
       mode = DatabaseInitializationMode.ALWAYS
     }
 
@@ -48,30 +48,30 @@ class DataSourceConfiguration {
   }
 
   /**
-   * Database config: comment
+   * Database config: table_02
    */
-  @ConfigurationProperties(prefix = "app.datasource.comment")
+  @ConfigurationProperties(prefix = "app.datasource.table02")
   @Bean
-  fun commentDataSourcePropperties(): DataSourceProperties {
+  fun table02DataSourcePropperties(): DataSourceProperties {
     return DataSourceProperties()
   }
 
   @Bean
-  @Qualifier("commentDataSourcePropperties")
-  fun commentDataSource(datasourcePropperties: DataSourceProperties): DataSource {
+  @Qualifier("table02DataSourcePropperties")
+  fun table02DataSource(datasourcePropperties: DataSourceProperties): DataSource {
     return datasourcePropperties
       .initializeDataSourceBuilder()
       .build()
   }
 
   @Bean
-  @Qualifier("commentDataSource")
-  fun commentJDBCClient(dataSource: DataSource): JdbcClient = JdbcClient.create(dataSource)
+  @Qualifier("table02DataSource")
+  fun table02JDBCClient(dataSource: DataSource): JdbcClient = JdbcClient.create(dataSource)
 
   @Bean
-  fun commentDatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseInitializer {
+  fun table02DatabaseInitializer(dataSource: DataSource): DataSourceScriptDatabaseInitializer {
     val settings = DatabaseInitializationSettings().apply {
-      schemaLocations = listOf("classpath:comments-schema.sql")
+      schemaLocations = listOf("classpath:table02-schema.sql")
       mode = DatabaseInitializationMode.ALWAYS
     }
 
