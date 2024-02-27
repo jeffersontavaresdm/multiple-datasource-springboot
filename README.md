@@ -45,7 +45,6 @@ fun commentDataSource(datasourcePropperties: DataSourceProperties): DataSource {
 // Restante do código omitido...
 ````
 ```
-# app.properties
 app:
   datasource:
     post:
