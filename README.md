@@ -6,40 +6,38 @@ As configurações de banco de dados estão contidas nos arquivos `DataSourceCon
 
 ````
 /**
- * Database config: post
- */
-@ConfigurationProperties(prefix = "app.datasource.post")
+  * Database config: table_01
+  */
+@ConfigurationProperties(prefix = "app.datasource.table01")
 @Bean
 @Primary
-fun postDataSourcePropperties(): DataSourceProperties {
-    return DataSourceProperties()
+fun table01DataSourcePropperties(): DataSourceProperties {
+  return DataSourceProperties()
 }
 
 @Bean
 @Primary
-fun postDataSource(datasourcePropperties: DataSourceProperties): DataSource {
-    return datasourcePropperties
-        .initializeDataSourceBuilder()
-        .build()
+fun table01DataSource(datasourcePropperties: DataSourceProperties): DataSource {
+  return datasourcePropperties
+    .initializeDataSourceBuilder()
+    .build()
 }
-
-// Restante do código omitido...
 
 /**
- * Database config: comment
- */
-@ConfigurationProperties(prefix = "app.datasource.comment")
+  * Database config: table_02
+  */
+@ConfigurationProperties(prefix = "app.datasource.table02")
 @Bean
-fun commentDataSourcePropperties(): DataSourceProperties {
-    return DataSourceProperties()
+fun table02DataSourcePropperties(): DataSourceProperties {
+  return DataSourceProperties()
 }
 
 @Bean
-@Qualifier("commentDataSourcePropperties")
-fun commentDataSource(datasourcePropperties: DataSourceProperties): DataSource {
-    return datasourcePropperties
-        .initializeDataSourceBuilder()
-        .build()
+@Qualifier("table02DataSourcePropperties")
+fun table02DataSource(datasourcePropperties: DataSourceProperties): DataSource {
+  return datasourcePropperties
+    .initializeDataSourceBuilder()
+    .build()
 }
 
 // Restante do código omitido...
